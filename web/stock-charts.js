@@ -511,15 +511,10 @@
             if (li) li.innerHTML = "<p>" + s.ticker + "</p>";
         });
 
-        // Dim the unused / empty tab slots so they look inactive and
-        // don't mislead the user into thinking there's a chart behind them.
+        // Remove unused tab slots entirely so the 3 ticker tabs stretch to fill.
         for (let i = symbols.length; i < TOTAL_TAB_SLOTS; i++) {
             const li = document.getElementById("shell_tab" + i);
-            if (li) {
-                li.innerHTML = "<p>EMPTY</p>";
-                li.style.opacity = "0.25";
-                li.style.pointerEvents = "none";
-            }
+            if (li) li.remove();
         }
 
         // Pre-size containers so the canvas mounts without layout shift.
