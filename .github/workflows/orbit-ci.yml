@@ -1,0 +1,43 @@
+name: ORBIT CI
+
+on:
+  push:
+    paths:
+      - "orbit/**"
+  pull_request:
+    paths:
+      - "orbit/**"
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: orbit/backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+      - run: pip install -e ".[dev]"
+      - run: ruff check app/ tests/
+      - run: ruff format --check app/ tests/
+      - run: mypy app/
+      - run: pytest --tb=short -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: orbit/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install
+      - run: npx tsc --noEmit
+      - run: npx eslint 'src/**/*.{ts,tsx}'
+      - run: npx prettier --check 'src/**/*.{ts,tsx,css}'
+      - run: npx vitest run

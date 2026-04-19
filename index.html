@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ORBIT</title>
+        <link rel="icon" href="data:,">
+
+        <!-- Augmented UI framework CSS -->
+        <link rel="stylesheet" href="src/node_modules/augmented-ui/augmented.css" />
+        <!-- Main CSS -->
+        <link rel="stylesheet" href="src/assets/css/main.css" />
+        <link rel="stylesheet" href="src/assets/css/modal.css" />
+        <link rel="stylesheet" href="src/assets/css/boot_screen.css" />
+        <link rel="stylesheet" href="src/assets/css/media_player.css" />
+        <link rel="stylesheet" href="src/assets/css/main_shell.css" />
+        <link rel="stylesheet" href="src/assets/css/filesystem.css" />
+        <link rel="stylesheet" href="src/assets/css/keyboard.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_column.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_clock.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_sysinfo.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_hardwareInspector.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_cpuinfo.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_netstat.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_conninfo.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_globe.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_ramwatcher.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_toplist.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_fuzzyFinder.css" />
+        <link rel="stylesheet" href="src/assets/css/mod_processlist.css" />
+        <link rel="stylesheet" href="src/assets/css/extra_ratios.css" />
+        <!-- xterm CSS for terminal shell styling -->
+        <link rel="stylesheet" href="src/node_modules/xterm/css/xterm.css" />
+    </head>
+    <body class="solidBackground">
+        <!-- Click-to-start gate. Browsers block audio until a user gesture,
+             so we hold boot until the user taps. Pure CSS styling keeps it
+             visually consistent with the rest of the UI. -->
+        <div id="start_gate" style="position:fixed;inset:0;z-index:99999999;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:sans-serif;letter-spacing:0.4em;font-size:1.4vh;">
+            <div style="text-align:center;">
+                <div style="font-size:6vh;letter-spacing:0.5em;margin-bottom:2vh;">ORBIT</div>
+                <div style="opacity:0.6;">CLICK ANYWHERE TO BOOT</div>
+                <div style="opacity:0.4;margin-top:1.5vh;font-size:1.1vh;">PRESS SPACE TO SKIP BOOT</div>
+            </div>
+        </div>
+
+        <section id="boot_screen"></section>
+
+        <!-- Shim must load first: defines require(), __dirname, process, etc. -->
+        <script src="/env.js"></script>
+        <script src="web/shim.js"></script>
+
+        <!-- Chart component: `defer` so it parses after the rest of the page
+             and doesn't block boot. lightweight-charts itself is lazy-loaded
+             on first pane mount from inside this file. -->
+        <script defer src="web/stock-charts.js"></script>
+        <!-- ORBIT UI layer — relabels panels and wires backend data -->
+        <script defer src="web/orbit-ui.js"></script>
+
+        <!-- Browser-friendly UMD builds of the JS deps the renderer imports -->
+        <script src="src/node_modules/xterm/lib/xterm.js"></script>
+        <script src="src/node_modules/xterm-addon-attach/lib/xterm-addon-attach.js"></script>
+        <script src="src/node_modules/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
+        <script src="src/node_modules/xterm-addon-ligatures/lib/xterm-addon-ligatures.js"></script>
+        <script src="src/node_modules/xterm-addon-webgl/lib/xterm-addon-webgl.js"></script>
+        <script src="src/node_modules/smoothie/smoothie.js"></script>
+        <script src="src/node_modules/howler/dist/howler.js"></script>
+        <!-- Self-contained browserify bundle that exposes window.ENCOM for the 3D globe -->
+        <script src="src/assets/vendor/encom-globe.js"></script>
+
+        <!-- CommonJS-only deps bundled via esbuild -->
+        <script src="web/bundle.js"></script>
+
+        <!-- Preload JSON + boot_log, then launch the renderer -->
+        <script>
+        (async function bootWeb() {
+            const USER_DATA = "web/userData";
+            const shim = window.__edexShim;
+
+            async function preload(url, asJson) {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("preload failed: " + url);
+                const txt = await res.text();
+                shim.primeCache(url, txt);
+                if (asJson) {
+                    try { JSON.parse(txt); } catch (e) { console.warn("bad JSON:", url); }
+                }
+                return txt;
+            }
+
+            // Directory manifests (what _renderer.js reads to populate dropdowns)
+            const kbList = [
+                "da-DK.json","de-DE.json","en-COLEMAK.json","en-DVORAK.json","en-GB.json",
+                "en-NORMAN.json","en-US.json","en-WORKMAN.json","es-ES.json","es-LAT.json",
+                "fr-BEPO.json","fr-FR.json","hu-HU.json","it-IT.json","nl-BE.json",
+                "pt-BR.json","sv-SE.json","tr-TR-F.json","tr-TR-Q.json",
+            ];
+            const themeList = [
+                "apollo-notype.json","apollo.json","blade.json","chalkboard-ligatures.json",
+                "chalkboard-notype.json","chalkboard.json","cyborg-focus.json","cyborg.json",
+                "interstellar.json","matrix.json","navy-disrupted.json","navy-notype.json",
+                "navy.json","nord.json","prism.json","red.json","tron-colorfilter.json",
+                "tron-disrupted.json","tron-fulltype.json","tron-notype.json",
+                "tron-typeleft.json","tron.json",
+            ];
+
+            shim.primeDir(USER_DATA + "/keyboards", kbList);
+            shim.primeDir(USER_DATA + "/themes", themeList);
+
+            const jobs = [
+                preload(USER_DATA + "/settings.json", true),
+                preload(USER_DATA + "/shortcuts.json", true),
+                preload(USER_DATA + "/lastWindowState.json", true),
+                preload("src/assets/misc/boot_log.txt", false),
+                preload("src/assets/misc/grid.json", true),
+                preload("src/assets/icons/file-icons.json", true),
+            ];
+            for (const kb of kbList) jobs.push(preload(USER_DATA + "/keyboards/" + kb, true));
+            for (const th of themeList) jobs.push(preload(USER_DATA + "/themes/" + th, true));
+
+            try { await Promise.all(jobs); }
+            catch (e) { console.error("Preload error:", e); }
+
+            // Now that xterm/smoothie/howler/bundle are on window, wire them into require()
+            shim.finalizeUMD();
+
+            // Sequentially inject the original class scripts + renderer.
+            // Sequential load preserves global ordering the original code expects.
+            // Load the filename→icon matcher as a plain script; it assigns
+            // `module.exports = matchIcon`, which we snapshot immediately.
+            await loadScript("src/assets/misc/file-icons-match.js");
+            window.__edexFileIconsMatcher = window.module.exports;
+            window.module = { exports: {} };
+
+            const scripts = [
+                "src/node_modules/pdfjs-dist/build/pdf.js",
+                "src/classes/modal.class.js",
+                "src/classes/terminal.class.js",
+                "src/classes/docReader.class.js",
+                "src/classes/mediaPlayer.class.js",
+                "src/classes/filesystem.class.js",
+                "src/classes/keyboard.class.js",
+                "src/classes/updateChecker.class.js",
+                "src/classes/clock.class.js",
+                "src/classes/sysinfo.class.js",
+                "src/classes/hardwareInspector.class.js",
+                "src/classes/cpuinfo.class.js",
+                "src/classes/netstat.class.js",
+                "src/classes/conninfo.class.js",
+                "src/classes/locationGlobe.class.js",
+                "src/classes/ramwatcher.class.js",
+                "src/classes/toplist.class.js",
+                "src/classes/fuzzyFinder.class.js",
+                "src/classes/audiofx.class.js",
+                "src/_renderer.js",
+            ];
+
+            function loadScript(src) {
+                return new Promise((resolve) => {
+                    const s = document.createElement("script");
+                    s.src = src;
+                    s.onload = () => resolve();
+                    s.onerror = (e) => { console.warn("script failed:", src, e); resolve(); };
+                    document.body.appendChild(s);
+                });
+            }
+
+            // Wait for click (full boot) or Space (skip boot) before running
+            // the renderer so audio unlocks and the intro animation can play.
+            await new Promise((resolve) => {
+                const gate = document.getElementById("start_gate");
+
+                function dismissGate() {
+                    gate.style.transition = "opacity 200ms";
+                    gate.style.opacity = "0";
+                    setTimeout(() => gate.remove(), 220);
+                }
+
+                // CLICK = full cinematic boot (default)
+                // Safari requires AudioContext created AND resumed inside the
+                // click gesture — no deferred resume(). Playing a silent Howl
+                // here forces Howler to build its entire WebAudio graph
+                // (ctx + masterGain) while still in the gesture stack.
+                gate.addEventListener("click", () => {
+                    try {
+                        if (window.Howl) {
+                            var silence = new Howl({
+                                src: ["data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA="],
+                                volume: 0
+                            });
+                            silence.play();
+                        }
+                    } catch (e) {}
+                    dismissGate();
+                    resolve();
+                }, { once: true });
+
+                // SPACE = skip boot animation, jump straight to dashboard.
+                // _renderer.js creates window.settings then checks
+                // window.settings.nointroOverride at line ~210. We need
+                // that flag to be true AFTER _renderer.js assigns window.settings
+                // (line 52) and forces nointroOverride=false (line 60), but
+                // BEFORE the if-check at line 210.
+                //
+                // Strategy: intercept the window.settings assignment using a
+                // property setter. When _renderer.js does
+                // `window.settings = require(...)`, our setter stores the object
+                // and patches nointroOverride=true on it. A matching getter
+                // returns the patched object. After the first assignment we
+                // clean up by reverting to a plain data property.
+                document.addEventListener("keydown", function onSpace(e) {
+                    if (e.code !== "Space") return;
+                    e.preventDefault();
+                    document.removeEventListener("keydown", onSpace);
+
+                    // Install the intercept before scripts load.
+                    // _renderer.js flow:
+                    //   line 52: window.settings = require(settingsFile)
+                    //   line 60: window.settings.nointroOverride = false
+                    //   line 210: if (window.settings.nointroOverride) { skip }
+                    // We need nointroOverride to read as true at line 210
+                    // despite line 60 forcing it false. So we lock the
+                    // property on the settings object to always return true.
+                    let _settingsStore = undefined;
+                    Object.defineProperty(window, "settings", {
+                        configurable: true,
+                        set(val) {
+                            _settingsStore = val;
+                            if (val && typeof val === "object") {
+                                // Lock nointroOverride to true. The non-writable
+                                // descriptor silently ignores the `= false` at
+                                // line 60 (no strict mode in _renderer.js).
+                                Object.defineProperty(val, "nointroOverride", {
+                                    value: true,
+                                    writable: false,
+                                    configurable: true,
+                                    enumerable: true,
+                                });
+                            }
+                            // Revert window.settings to a plain data property
+                            // so later code works normally.
+                            Object.defineProperty(window, "settings", {
+                                value: _settingsStore,
+                                writable: true,
+                                configurable: true,
+                                enumerable: true,
+                            });
+                        },
+                        get() { return _settingsStore; },
+                    });
+
+                    dismissGate();
+                    resolve();
+                });
+            });
+
+            for (const src of scripts) await loadScript(src);
+
+            // The silent Howl played in the click handler already created
+            // Howler.ctx in "running" state. All subsequent Howls (created
+            // by AudioManager) reuse this same running context.
+
+            // User asked to suppress the intro theme music specifically.
+            // audiofx.class.js already loaded; neuter its `theme` Howl.
+            if (window.audioManager) {
+                window.audioManager.theme = { play: () => true, stop: () => {}, mute: () => {} };
+            }
+
+            // Mount the stock charts via the lazy-loaded component in
+            // web/stock-charts.js. The component handles lightweight-charts
+            // loading, IntersectionObserver-gated init, ResizeObserver, and
+            // live series.update() ticks.
+            (async function mountStockCharts() {
+                const SYMBOLS = [
+                    { ticker: "AAPL",  finnhub: "AAPL",  yahoo: "AAPL"  },
+                    { ticker: "NVDA",  finnhub: "NVDA",  yahoo: "NVDA"  },
+                    { ticker: "TSM",   finnhub: "TSM",   yahoo: "TSM"   },
+                ];
+
+                for (let i = 0; i < 120 && !document.getElementById("main_shell_tabs"); i++) {
+                    await new Promise(r => setTimeout(r, 500));
+                }
+                const tabsEl = document.getElementById("main_shell_tabs");
+                const inner = document.getElementById("main_shell_innercontainer");
+                if (!tabsEl || !inner) return;
+
+                if (window.term) {
+                    for (const k of Object.keys(window.term)) {
+                        try { window.term[k].term && window.term[k].term.dispose && window.term[k].term.dispose(); } catch (e) {}
+                    }
+                }
+
+                // Replace window.term with a Proxy that absorbs any property
+                // access without throwing. The original _renderer.js scatters
+                // window.term[n].term.focus() / .fit() / .clipboard.copy()
+                // across mouseup, resize, and keyboard-shortcut handlers.
+                // With terminals gone, a silent no-op proxy prevents all of
+                // those from crashing while keeping the rest of the UI alive.
+                const termNoop = () => {};
+                const termTrap = { get: () => new Proxy(termNoop, termTrap) };
+                window.term = new Proxy({}, termTrap);
+                window.onmouseup = null;
+
+                // The `defer` on <script src="web/stock-charts.js"> means it
+                // may not be ready yet. Poll briefly for the global.
+                for (let i = 0; i < 40 && !(window.__PrismCharts && window.__PrismCharts.mount); i++) {
+                    await new Promise(r => setTimeout(r, 100));
+                }
+                if (window.__PrismCharts && window.__PrismCharts.mount) {
+                    window.__PrismCharts.mount({ tabsEl, inner, symbols: SYMBOLS });
+                }
+            })();
+
+            // Simulate an active network so the 3D globe stays in "online"
+            // mode and keeps spinning with a pin/marker instead of dimming.
+            // (Backend is still empty — this just fakes the state locally.)
+            (async function keepGlobeAlive() {
+                for (let i = 0; i < 60 && !(window.mods && window.mods.netstat); i++) {
+                    await new Promise(r => setTimeout(r, 500));
+                }
+                if (!window.mods || !window.mods.netstat) return;
+
+                const netstat = window.mods.netstat;
+                netstat.ping = () => Promise.resolve(42);
+                netstat.ipinfo = { ip: "0.0.0.0", geo: { latitude: 37.7749, longitude: -122.4194 } };
+                netstat.geoLookup = { get: () => ({ location: { latitude: 37.7749, longitude: -122.4194 } }) };
+                netstat.lastconn.finished = true;
+
+                // Pin offline permanently false by redefining the property.
+                Object.defineProperty(netstat, "offline", {
+                    get: () => false, set: () => {}, configurable: true,
+                });
+
+                // Paint header values immediately so they don't flicker to "OFFLINE".
+                const setText = (sel, txt) => { const el = document.querySelector(sel); if (el) el.innerHTML = txt; };
+                setText("#mod_netstat_innercontainer > div:first-child > h2", "ONLINE");
+                setText("#mod_netstat_innercontainer > div:nth-child(2) > h2", "0.0.0.0");
+                setText("#mod_netstat_innercontainer > div:nth-child(3) > h2", "42ms");
+
+                // Drop the "offline" class off the globe container so the CSS dim lifts.
+                const dropOffline = () => {
+                    const g = document.querySelector("div#mod_globe");
+                    if (g) g.setAttribute("class", "");
+                };
+                dropOffline();
+                setInterval(dropOffline, 500);
+            })();
+
+            // Boot ORBIT UI layer — relabels panels, wires live data
+            if (window.__orbitBoot) {
+                window.__orbitBoot();
+            }
+        })();
+        </script>
+    </body>
+</html>

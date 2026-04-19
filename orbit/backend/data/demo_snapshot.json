@@ -1,0 +1,664 @@
+{
+  "events": [
+    {
+      "id": "demo-gdelt-001",
+      "source": "gdelt",
+      "timestamp": "2026-04-14T08:00:00Z",
+      "description": "US increases tariffs on semiconductor imports from Taiwan",
+      "cameo_code": "0231",
+      "goldstein_score": -5.0,
+      "num_sources": 12,
+      "lat": 25.03,
+      "lon": 121.56,
+      "countries": "[\"US\",\"TW\"]",
+      "sentiment": -0.3,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-gdelt-002",
+      "source": "gdelt",
+      "timestamp": "2026-04-14T08:15:00Z",
+      "description": "China announces new AI chip export controls",
+      "cameo_code": "163",
+      "goldstein_score": -7.0,
+      "num_sources": 25,
+      "lat": 39.9,
+      "lon": 116.4,
+      "countries": "[\"CN\",\"US\"]",
+      "sentiment": -0.5,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-gdelt-003",
+      "source": "gdelt",
+      "timestamp": "2026-04-14T09:00:00Z",
+      "description": "EU approves new trade agreement with South Korea for electronics",
+      "cameo_code": "057",
+      "goldstein_score": 6.0,
+      "num_sources": 8,
+      "lat": 50.85,
+      "lon": 4.35,
+      "countries": "[\"EU\",\"KR\"]",
+      "sentiment": 0.4,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-news-001",
+      "source": "newsapi",
+      "timestamp": "2026-04-14T07:30:00Z",
+      "description": "Apple reportedly shifting supply chain amid Taiwan tensions",
+      "cameo_code": "",
+      "goldstein_score": 0.0,
+      "num_sources": 1,
+      "lat": 0.0,
+      "lon": 0.0,
+      "countries": "[]",
+      "sentiment": -0.2,
+      "metadata": "{\"ticker\": \"AAPL\"}"
+    },
+    {
+      "id": "demo-news-002",
+      "source": "newsapi",
+      "timestamp": "2026-04-14T08:45:00Z",
+      "description": "NVIDIA sees strong demand for next-gen AI training chips",
+      "cameo_code": "",
+      "goldstein_score": 0.0,
+      "num_sources": 1,
+      "lat": 0.0,
+      "lon": 0.0,
+      "countries": "[]",
+      "sentiment": 0.6,
+      "metadata": "{\"ticker\": \"NVDA\"}"
+    },
+    {
+      "id": "demo-gdelt-004",
+      "source": "gdelt",
+      "timestamp": "2026-04-18T06:15:00Z",
+      "description": "Japan earthquake disrupts chip equipment supply",
+      "cameo_code": "0231",
+      "goldstein_score": -4.0,
+      "num_sources": 18,
+      "lat": 35.68,
+      "lon": 139.69,
+      "countries": "[\"JP\",\"TW\"]",
+      "sentiment": -0.4,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-gdelt-005",
+      "source": "gdelt",
+      "timestamp": "2026-04-18T09:30:00Z",
+      "description": "US-Taiwan defense cooperation agreement signed",
+      "cameo_code": "057",
+      "goldstein_score": 6.0,
+      "num_sources": 15,
+      "lat": 25.03,
+      "lon": 121.56,
+      "countries": "[\"US\",\"TW\"]",
+      "sentiment": 0.5,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-gdelt-006",
+      "source": "gdelt",
+      "timestamp": "2026-04-18T11:00:00Z",
+      "description": "Shanghai port congestion delays semiconductor shipments",
+      "cameo_code": "0231",
+      "goldstein_score": -3.5,
+      "num_sources": 8,
+      "lat": 31.23,
+      "lon": 121.47,
+      "countries": "[\"CN\",\"US\",\"TW\"]",
+      "sentiment": -0.3,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-news-003",
+      "source": "newsapi",
+      "timestamp": "2026-04-18T13:45:00Z",
+      "description": "TSMC announces Arizona fab production milestone",
+      "cameo_code": "",
+      "goldstein_score": 5.0,
+      "num_sources": 20,
+      "lat": 33.45,
+      "lon": -112.07,
+      "countries": "[\"US\",\"TW\"]",
+      "sentiment": 0.7,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-gdelt-007",
+      "source": "gdelt",
+      "timestamp": "2026-04-18T15:20:00Z",
+      "description": "South Korea export controls on memory chips tighten",
+      "cameo_code": "163",
+      "goldstein_score": -5.5,
+      "num_sources": 11,
+      "lat": 37.57,
+      "lon": 126.98,
+      "countries": "[\"KR\",\"US\",\"CN\"]",
+      "sentiment": -0.4,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-gdelt-008",
+      "source": "gdelt",
+      "timestamp": "2026-04-18T17:00:00Z",
+      "description": "Singapore semiconductor hub expansion approved",
+      "cameo_code": "057",
+      "goldstein_score": 4.0,
+      "num_sources": 6,
+      "lat": 1.35,
+      "lon": 103.82,
+      "countries": "[\"SG\",\"US\"]",
+      "sentiment": 0.3,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-news-004",
+      "source": "newsapi",
+      "timestamp": "2026-04-18T19:10:00Z",
+      "description": "Pentagon increases AI chip procurement budget",
+      "cameo_code": "",
+      "goldstein_score": 7.0,
+      "num_sources": 25,
+      "lat": 38.87,
+      "lon": -77.05,
+      "countries": "[\"US\"]",
+      "sentiment": 0.6,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-fred-001",
+      "source": "fred",
+      "timestamp": "2026-04-14T00:00:00Z",
+      "description": "VIX: 22.5",
+      "cameo_code": "",
+      "goldstein_score": 0.0,
+      "num_sources": 1,
+      "lat": 0.0,
+      "lon": 0.0,
+      "countries": "[]",
+      "sentiment": 0.0,
+      "metadata": "{}"
+    },
+    {
+      "id": "demo-fred-002",
+      "source": "fred",
+      "timestamp": "2026-04-14T00:00:00Z",
+      "description": "10Y Yield: 4.35",
+      "cameo_code": "",
+      "goldstein_score": 0.0,
+      "num_sources": 1,
+      "lat": 0.0,
+      "lon": 0.0,
+      "countries": "[]",
+      "sentiment": 0.0,
+      "metadata": "{}"
+    }
+  ],
+  "event_scores": [
+    {
+      "event_id": "demo-gdelt-001",
+      "ticker": "TSM",
+      "relevance": 0.85,
+      "implied_direction": "short",
+      "computed_at": "2026-04-14T08:01:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-001",
+      "ticker": "AAPL",
+      "relevance": 0.60,
+      "implied_direction": "short",
+      "computed_at": "2026-04-14T08:01:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-002",
+      "ticker": "NVDA",
+      "relevance": 0.78,
+      "implied_direction": "short",
+      "computed_at": "2026-04-14T08:16:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-003",
+      "ticker": "TSM",
+      "relevance": 0.45,
+      "implied_direction": "long",
+      "computed_at": "2026-04-14T09:01:00Z"
+    },
+    {
+      "event_id": "demo-news-001",
+      "ticker": "AAPL",
+      "relevance": 0.50,
+      "implied_direction": "short",
+      "computed_at": "2026-04-14T07:31:00Z"
+    },
+    {
+      "event_id": "demo-news-002",
+      "ticker": "NVDA",
+      "relevance": 0.55,
+      "implied_direction": "long",
+      "computed_at": "2026-04-14T08:46:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-004",
+      "ticker": "TSM",
+      "relevance": 0.80,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T06:16:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-004",
+      "ticker": "NVDA",
+      "relevance": 0.55,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T06:16:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-004",
+      "ticker": "AAPL",
+      "relevance": 0.40,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T06:16:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-005",
+      "ticker": "TSM",
+      "relevance": 0.82,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T09:31:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-005",
+      "ticker": "AAPL",
+      "relevance": 0.58,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T09:31:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-005",
+      "ticker": "NVDA",
+      "relevance": 0.52,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T09:31:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-006",
+      "ticker": "AAPL",
+      "relevance": 0.72,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T11:01:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-006",
+      "ticker": "TSM",
+      "relevance": 0.68,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T11:01:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-006",
+      "ticker": "NVDA",
+      "relevance": 0.60,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T11:01:00Z"
+    },
+    {
+      "event_id": "demo-news-003",
+      "ticker": "TSM",
+      "relevance": 0.92,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T13:46:00Z"
+    },
+    {
+      "event_id": "demo-news-003",
+      "ticker": "AAPL",
+      "relevance": 0.55,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T13:46:00Z"
+    },
+    {
+      "event_id": "demo-news-003",
+      "ticker": "NVDA",
+      "relevance": 0.50,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T13:46:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-007",
+      "ticker": "NVDA",
+      "relevance": 0.65,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T15:21:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-007",
+      "ticker": "AAPL",
+      "relevance": 0.48,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T15:21:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-007",
+      "ticker": "TSM",
+      "relevance": 0.35,
+      "implied_direction": "short",
+      "computed_at": "2026-04-18T15:21:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-008",
+      "ticker": "AAPL",
+      "relevance": 0.45,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T17:01:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-008",
+      "ticker": "NVDA",
+      "relevance": 0.40,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T17:01:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-008",
+      "ticker": "TSM",
+      "relevance": 0.30,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T17:01:00Z"
+    },
+    {
+      "event_id": "demo-news-004",
+      "ticker": "NVDA",
+      "relevance": 0.88,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T19:11:00Z"
+    },
+    {
+      "event_id": "demo-news-004",
+      "ticker": "AAPL",
+      "relevance": 0.45,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T19:11:00Z"
+    },
+    {
+      "event_id": "demo-news-004",
+      "ticker": "TSM",
+      "relevance": 0.38,
+      "implied_direction": "long",
+      "computed_at": "2026-04-18T19:11:00Z"
+    }
+  ],
+  "bars": [
+    {"ticker": "AAPL", "timestamp": "2026-04-14T09:30:00Z", "open": 198.50, "high": 199.20, "low": 197.80, "close": 198.90, "volume": 15200},
+    {"ticker": "AAPL", "timestamp": "2026-04-14T09:31:00Z", "open": 198.90, "high": 199.50, "low": 198.40, "close": 199.10, "volume": 12800},
+    {"ticker": "AAPL", "timestamp": "2026-04-14T09:32:00Z", "open": 199.10, "high": 199.80, "low": 198.60, "close": 199.40, "volume": 11300},
+    {"ticker": "AAPL", "timestamp": "2026-04-14T09:33:00Z", "open": 199.40, "high": 200.10, "low": 199.00, "close": 199.80, "volume": 14100},
+    {"ticker": "AAPL", "timestamp": "2026-04-14T09:34:00Z", "open": 199.80, "high": 200.30, "low": 199.20, "close": 199.60, "volume": 10900},
+    {"ticker": "NVDA", "timestamp": "2026-04-14T09:30:00Z", "open": 875.00, "high": 878.50, "low": 872.00, "close": 876.20, "volume": 28500},
+    {"ticker": "NVDA", "timestamp": "2026-04-14T09:31:00Z", "open": 876.20, "high": 880.00, "low": 874.50, "close": 879.10, "volume": 31200},
+    {"ticker": "NVDA", "timestamp": "2026-04-14T09:32:00Z", "open": 879.10, "high": 882.00, "low": 877.00, "close": 881.50, "volume": 25800},
+    {"ticker": "NVDA", "timestamp": "2026-04-14T09:33:00Z", "open": 881.50, "high": 884.00, "low": 880.00, "close": 883.20, "volume": 22300},
+    {"ticker": "NVDA", "timestamp": "2026-04-14T09:34:00Z", "open": 883.20, "high": 885.50, "low": 881.00, "close": 882.80, "volume": 19700},
+    {"ticker": "TSM", "timestamp": "2026-04-14T09:30:00Z", "open": 152.30, "high": 153.00, "low": 151.50, "close": 152.70, "volume": 18400},
+    {"ticker": "TSM", "timestamp": "2026-04-14T09:31:00Z", "open": 152.70, "high": 153.50, "low": 152.00, "close": 153.10, "volume": 16200},
+    {"ticker": "TSM", "timestamp": "2026-04-14T09:32:00Z", "open": 153.10, "high": 154.00, "low": 152.50, "close": 153.80, "volume": 14500},
+    {"ticker": "TSM", "timestamp": "2026-04-14T09:33:00Z", "open": 153.80, "high": 154.50, "low": 153.00, "close": 154.20, "volume": 13800},
+    {"ticker": "TSM", "timestamp": "2026-04-14T09:34:00Z", "open": 154.20, "high": 155.00, "low": 153.50, "close": 154.00, "volume": 12100}
+  ],
+  "verdicts": [
+    {
+      "id": "demo-verdict-001",
+      "ticker": "AAPL",
+      "verdict_class": "buy",
+      "direction": "long",
+      "relevance_score": 0.72,
+      "issued_at": "2026-04-13T10:00:00Z",
+      "verdict_object": "{}"
+    },
+    {
+      "id": "demo-verdict-002",
+      "ticker": "AAPL",
+      "verdict_class": "sell",
+      "direction": "short",
+      "relevance_score": 0.65,
+      "issued_at": "2026-04-13T12:30:00Z",
+      "verdict_object": "{}"
+    },
+    {
+      "id": "demo-verdict-003",
+      "ticker": "NVDA",
+      "verdict_class": "strong_buy",
+      "direction": "long",
+      "relevance_score": 0.81,
+      "issued_at": "2026-04-13T11:00:00Z",
+      "verdict_object": "{}"
+    },
+    {
+      "id": "demo-verdict-004",
+      "ticker": "NVDA",
+      "verdict_class": "sell",
+      "direction": "short",
+      "relevance_score": 0.58,
+      "issued_at": "2026-04-13T14:00:00Z",
+      "verdict_object": "{}"
+    },
+    {
+      "id": "demo-verdict-005",
+      "ticker": "TSM",
+      "verdict_class": "buy",
+      "direction": "long",
+      "relevance_score": 0.70,
+      "issued_at": "2026-04-13T13:00:00Z",
+      "verdict_object": "{}"
+    },
+    {
+      "id": "demo-verdict-006",
+      "ticker": "AAPL",
+      "verdict_class": "buy",
+      "direction": "long",
+      "relevance_score": 0.68,
+      "issued_at": "2026-04-14T08:05:00Z",
+      "verdict_object": "{}"
+    },
+    {
+      "id": "demo-verdict-007",
+      "ticker": "NVDA",
+      "verdict_class": "strong_buy",
+      "direction": "long",
+      "relevance_score": 0.77,
+      "issued_at": "2026-04-14T08:50:00Z",
+      "verdict_object": "{}"
+    },
+    {
+      "id": "demo-verdict-008",
+      "ticker": "TSM",
+      "verdict_class": "sell",
+      "direction": "short",
+      "relevance_score": 0.74,
+      "issued_at": "2026-04-14T09:05:00Z",
+      "verdict_object": "{}"
+    }
+  ],
+  "trades": [
+    {
+      "id": "demo-trade-001",
+      "verdict_id": "demo-verdict-001",
+      "ticker": "AAPL",
+      "direction": "long",
+      "size_shares": 50,
+      "entry_price": 261.40,
+      "exit_price": 263.80,
+      "executed_at": "2026-04-18T14:01:00Z",
+      "closed_at": "2026-04-18T15:30:00Z",
+      "realized_pnl": 120.00
+    },
+    {
+      "id": "demo-trade-002",
+      "verdict_id": "demo-verdict-002",
+      "ticker": "AAPL",
+      "direction": "short",
+      "size_shares": 30,
+      "entry_price": 264.20,
+      "exit_price": 264.90,
+      "executed_at": "2026-04-18T15:31:00Z",
+      "closed_at": "2026-04-18T15:55:00Z",
+      "realized_pnl": -21.00
+    },
+    {
+      "id": "demo-trade-003",
+      "verdict_id": "demo-verdict-003",
+      "ticker": "NVDA",
+      "direction": "long",
+      "size_shares": 40,
+      "entry_price": 196.50,
+      "exit_price": 198.40,
+      "executed_at": "2026-04-18T14:15:00Z",
+      "closed_at": "2026-04-18T15:45:00Z",
+      "realized_pnl": 76.00
+    },
+    {
+      "id": "demo-trade-004",
+      "verdict_id": "demo-verdict-004",
+      "ticker": "NVDA",
+      "direction": "short",
+      "size_shares": 25,
+      "entry_price": 199.10,
+      "exit_price": 199.60,
+      "executed_at": "2026-04-18T15:50:00Z",
+      "closed_at": "2026-04-18T15:58:00Z",
+      "realized_pnl": -12.50
+    },
+    {
+      "id": "demo-trade-005",
+      "verdict_id": "demo-verdict-005",
+      "ticker": "TSM",
+      "direction": "long",
+      "size_shares": 35,
+      "entry_price": 361.80,
+      "exit_price": 363.50,
+      "executed_at": "2026-04-18T14:30:00Z",
+      "closed_at": "2026-04-18T15:40:00Z",
+      "realized_pnl": 59.50
+    },
+    {
+      "id": "demo-trade-006",
+      "verdict_id": "demo-verdict-006",
+      "ticker": "AAPL",
+      "direction": "long",
+      "size_shares": 50,
+      "entry_price": 261.40,
+      "exit_price": null,
+      "executed_at": "2026-04-18T16:01:00Z",
+      "closed_at": null,
+      "realized_pnl": null
+    },
+    {
+      "id": "demo-trade-007",
+      "verdict_id": "demo-verdict-007",
+      "ticker": "NVDA",
+      "direction": "long",
+      "size_shares": 40,
+      "entry_price": 196.80,
+      "exit_price": null,
+      "executed_at": "2026-04-18T16:05:00Z",
+      "closed_at": null,
+      "realized_pnl": null
+    },
+    {
+      "id": "demo-trade-008",
+      "verdict_id": "demo-verdict-008",
+      "ticker": "TSM",
+      "direction": "short",
+      "size_shares": 30,
+      "entry_price": 364.80,
+      "exit_price": null,
+      "executed_at": "2026-04-18T16:10:00Z",
+      "closed_at": null,
+      "realized_pnl": null
+    }
+  ],
+  "outcomes": [
+    {
+      "event_id": "demo-news-001",
+      "verdict_id": "demo-verdict-001",
+      "trade_id": "demo-trade-001",
+      "horizon": "1d",
+      "forward_return": 0.0137,
+      "directionally_correct": true,
+      "computed_at": "2026-04-13T16:00:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-001",
+      "verdict_id": "demo-verdict-002",
+      "trade_id": "demo-trade-002",
+      "horizon": "1d",
+      "forward_return": 0.0076,
+      "directionally_correct": false,
+      "computed_at": "2026-04-13T16:00:00Z"
+    },
+    {
+      "event_id": "demo-news-002",
+      "verdict_id": "demo-verdict-003",
+      "trade_id": "demo-trade-003",
+      "horizon": "1d",
+      "forward_return": 0.0411,
+      "directionally_correct": true,
+      "computed_at": "2026-04-13T16:00:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-002",
+      "verdict_id": "demo-verdict-004",
+      "trade_id": "demo-trade-004",
+      "horizon": "1d",
+      "forward_return": 0.0137,
+      "directionally_correct": false,
+      "computed_at": "2026-04-13T16:00:00Z"
+    },
+    {
+      "event_id": "demo-gdelt-003",
+      "verdict_id": "demo-verdict-005",
+      "trade_id": "demo-trade-005",
+      "horizon": "1d",
+      "forward_return": 0.0244,
+      "directionally_correct": true,
+      "computed_at": "2026-04-13T16:00:00Z"
+    }
+  ],
+  "port_snapshots": [
+    {
+      "location": "Singapore",
+      "lat": 1.29,
+      "lon": 103.85,
+      "ship_count": 342,
+      "timestamp": "2026-04-14T08:00:00Z"
+    },
+    {
+      "location": "Rotterdam",
+      "lat": 51.92,
+      "lon": 4.48,
+      "ship_count": 187,
+      "timestamp": "2026-04-14T08:00:00Z"
+    },
+    {
+      "location": "Shanghai",
+      "lat": 31.23,
+      "lon": 121.47,
+      "ship_count": 456,
+      "timestamp": "2026-04-14T08:00:00Z"
+    },
+    {
+      "location": "LA/Long Beach",
+      "lat": 33.75,
+      "lon": -118.19,
+      "ship_count": 128,
+      "timestamp": "2026-04-14T08:00:00Z"
+    },
+    {
+      "location": "Busan",
+      "lat": 35.18,
+      "lon": 129.08,
+      "ship_count": 215,
+      "timestamp": "2026-04-14T08:00:00Z"
+    }
+  ]
+}

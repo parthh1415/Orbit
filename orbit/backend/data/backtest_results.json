@@ -1,0 +1,5 @@
+{
+  "AAPL": {"act_hit_rate": 0.564, "act_n": 142, "wait_hit_rate": 0.621, "ignore_hit_rate": 0.689},
+  "NVDA": {"act_hit_rate": 0.571, "act_n": 98, "wait_hit_rate": 0.598, "ignore_hit_rate": 0.712},
+  "TSM": {"act_hit_rate": 0.583, "act_n": 76, "wait_hit_rate": 0.634, "ignore_hit_rate": 0.701}
+}

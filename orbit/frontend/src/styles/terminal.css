@@ -1,0 +1,217 @@
+/* ============================================================
+   ORBIT Terminal Theme — eDEX-UI aesthetic
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap");
+
+/* ----- CSS Variables ----- */
+:root {
+  --bg: #000000;
+  --fg-primary: #e4e4e4;
+  --fg-dim: #666666;
+  --fg-bright: #ffffff;
+  --accent-teal: #5eead4;
+  --accent-coral: #f87171;
+  --accent-yellow: #facc15;
+  --border: #1f1f1f;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+}
+
+/* ----- Base Reset ----- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* ----- Scrollbar ----- */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-dim);
+}
+
+/* ----- Common utility classes ----- */
+.panel-header {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+  padding: 8px 12px 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-section {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.label {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 11px;
+  color: var(--fg-primary);
+}
+
+.value--bright {
+  color: var(--fg-bright);
+}
+
+.value--teal {
+  color: var(--accent-teal);
+}
+
+.value--coral {
+  color: var(--accent-coral);
+}
+
+.value--yellow {
+  color: var(--accent-yellow);
+}
+
+.value--dim {
+  color: var(--fg-dim);
+}
+
+/* ----- Button base ----- */
+.btn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--fg-primary);
+  padding: 4px 12px;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.btn:hover {
+  background: var(--border);
+  border-color: var(--fg-dim);
+}
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.btn--teal {
+  border-color: var(--accent-teal);
+  color: var(--accent-teal);
+}
+
+.btn--teal:hover {
+  background: rgba(94, 234, 212, 0.1);
+}
+
+.btn--coral {
+  border-color: var(--accent-coral);
+  color: var(--accent-coral);
+}
+
+.btn--coral:hover {
+  background: rgba(248, 113, 113, 0.1);
+}
+
+/* ----- Input base ----- */
+.input {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg-primary);
+  padding: 4px 8px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent-teal);
+}
+
+/* ----- Table base ----- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--fg-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 2px 4px;
+  color: var(--fg-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ----- Modal overlay ----- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 400px;
+  max-height: 300px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 16px;
+}

@@ -1,0 +1,99 @@
+/* ============================================================
+   ORBIT Layout Grid — eDEX-UI panel arrangement
+   ============================================================
+
+   Layout:
+   ┌──────────┬──────────────────────┬──────────┐
+   │          │  verdict-strip (40px)│          │
+   │  left    │  chart (fill)        │  right-t │
+   │  panel   │  scorecard (60px)    │  right-b │
+   │  (~20%)  │  (remaining ~60%)    │  (~20%)  │
+   ├──────────┴──────────────────────┴──────────┤
+   │  bottom-bar (~200px)                       │
+   ├────────────────────────────────────────────┤
+   │  status-bar (24px)                         │
+   └────────────────────────────────────────────┘
+*/
+
+#orbit-root {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(200px, 20%) 1fr minmax(200px, 20%);
+  grid-template-rows: 1fr 200px 24px;
+  grid-template-areas:
+    "left center right"
+    "bottom bottom bottom"
+    "status status status";
+  gap: 0;
+}
+
+/* ----- Left Panel ----- */
+.left-panel {
+  grid-area: left;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- Center (verdict + chart + scorecard) ----- */
+.center-panel {
+  grid-area: center;
+  display: grid;
+  grid-template-rows: 40px 1fr 60px;
+  overflow: hidden;
+}
+
+.center-panel__verdict {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.center-panel__chart {
+  overflow: hidden;
+  position: relative;
+}
+
+.center-panel__scorecard {
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ----- Right Panel ----- */
+.right-panel {
+  grid-area: right;
+  border-left: 1px solid var(--border);
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  overflow: hidden;
+}
+
+.right-panel__top {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.right-panel__bottom {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ----- Bottom Bar ----- */
+.bottom-bar {
+  grid-area: bottom;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ----- Status Bar ----- */
+.status-bar {
+  grid-area: status;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 10px;
+  color: var(--fg-dim);
+}
